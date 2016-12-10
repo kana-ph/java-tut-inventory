@@ -3,6 +3,8 @@ package ph.kana.inventory;
 import ph.kana.inventory.exception.ServiceException;
 import ph.kana.inventory.service.ItemService;
 
+import java.util.List;
+
 public class Main {
 
 	private static final ItemService itemService = new ItemService();
@@ -34,7 +36,7 @@ public class Main {
 				break;
 
 			case "list":
-				//TODO list item logic
+				list();
 				break;
 
 			case "delete":
@@ -63,6 +65,16 @@ public class Main {
 		Item item = itemService.update(id, name, quantity);
 		String message = String.format("Item #%d is now updated with name=%s and quantity=%d", item.getId(), item.getName(), item.getQuantity());
 		System.out.println(message);
+	}
+
+	private static void list() throws ServiceException {
+		List<Item> items = itemService.fetchAll();
+
+		System.out.printf("%3s %4s %s\n\n", "id", "Qty", "Name");
+
+		for (Item item : items) {
+			System.out.printf("%3d %4d %s\n", item.getId(), item.getQuantity(), item.getName());
+		}
 	}
 
 	private static void displayHelp() {

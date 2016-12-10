@@ -7,6 +7,8 @@ import ph.kana.inventory.dao.ItemDao;
 import ph.kana.inventory.exception.DataAccessException;
 import ph.kana.inventory.exception.ServiceException;
 
+import java.util.List;
+
 public class ItemService {
 
 	private final ItemDao itemDao = new FileItemDao();
@@ -39,6 +41,14 @@ public class ItemService {
 			}
 		} catch (DataAccessException e) {
 			throw new ServiceException("Error updating item", e);
+		}
+	}
+
+	public List<Item> fetchAll() throws ServiceException {
+		try {
+			return itemDao.fetchAll();
+		} catch (DataAccessException e) {
+			throw new ServiceException("Error fetching item data", e);
 		}
 	}
 }
