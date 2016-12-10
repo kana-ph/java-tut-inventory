@@ -26,17 +26,11 @@ public class Main {
 		String command = args[0].toLowerCase();
 		switch (command) {
 			case "add":
-				String name = args[1];
-				int quantity = Integer.parseInt(args[2]);
-
-				Item item = itemService.create(name, quantity);
-				String message = String.format("Item [%s] has been saved successfully!", item.getName());
-				System.out.println(message);
-
+				add(args);
 				break;
 
 			case "edit":
-				// TODO edit item logic
+				edit(args);
 				break;
 
 			case "list":
@@ -50,6 +44,25 @@ public class Main {
 			default:
 				displayHelp();
 		}
+	}
+
+	private static void add(String[] args) throws ServiceException {
+		String name = args[1];
+		int quantity = Integer.parseInt(args[2]);
+
+		Item item = itemService.create(name, quantity);
+		String message = String.format("Item [%s] has been saved successfully! id=%d", item.getName(), item.getId());
+		System.out.println(message);
+	}
+
+	private static void edit(String[] args) throws ServiceException {
+		Long id = Long.parseLong(args[1]);
+		String name = args[2];
+		int quantity = Integer.parseInt(args[3]);
+
+		Item item = itemService.update(id, name, quantity);
+		String message = String.format("Item #%d is now updated with name=%s and quantity=%d", item.getId(), item.getName(), item.getQuantity());
+		System.out.println(message);
 	}
 
 	private static void displayHelp() {
