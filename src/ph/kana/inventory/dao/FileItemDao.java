@@ -9,20 +9,16 @@ public class FileItemDao implements ItemDao {
 
 	@Override
 	public void save(Item item) throws DataAccessException {
-		try {
-			File file = new File("items.txt");
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-
-			writer.write(itemCsv(item));
-
+		File file = new File("items.txt");
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+			writer.write(formatItemAsCsv(item));
 			writer.flush();
-			writer.close();
 		} catch (IOException e) {
 			throw new DataAccessException(e);
 		}
 	}
 
-	private String itemCsv(Item item) {
+	private String formatItemAsCsv(Item item) {
 		return String.format("%d,%s", item.getQuantity(), item.getName());
 	}
 }

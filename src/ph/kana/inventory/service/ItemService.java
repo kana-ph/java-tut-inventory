@@ -5,12 +5,13 @@ import ph.kana.inventory.Item;
 import ph.kana.inventory.dao.FileItemDao;
 import ph.kana.inventory.dao.ItemDao;
 import ph.kana.inventory.exception.DataAccessException;
+import ph.kana.inventory.exception.ServiceException;
 
 public class ItemService {
 
-	ItemDao itemDao = new FileItemDao();
+	private final ItemDao itemDao = new FileItemDao();
 
-	public Item create(String name, int quantity) {
+	public Item create(String name, int quantity) throws ServiceException {
 		Item item = new Item();
 		item.setName(name);
 		item.setQuantity(quantity);
@@ -19,8 +20,7 @@ public class ItemService {
 			itemDao.save(item);
 			return item;
 		} catch (DataAccessException e) {
-			// TODO handle by rethrow
+			throw new ServiceException("Error saving item", e);
 		}
-		return null; // TODO after implementing rethrow
 	}
 }

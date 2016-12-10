@@ -1,5 +1,6 @@
 package ph.kana.inventory;
 
+import ph.kana.inventory.exception.ServiceException;
 import ph.kana.inventory.service.ItemService;
 
 public class Main {
@@ -10,11 +11,18 @@ public class Main {
 		if (args.length < 1) {
 			displayHelp();
 		} else {
-			executeCommand(args);
+			try {
+				executeCommand(args);
+			} catch (ServiceException e) {
+				String errorMessage = String.format("Error: %s", e.getMessage());
+				System.err.println(errorMessage);
+
+				System.exit(1);
+			}
 		}
 	}
 
-	private static void executeCommand(String[] args) {
+	private static void executeCommand(String[] args) throws ServiceException {
 		String command = args[0].toLowerCase();
 		switch (command) {
 			case "add":
