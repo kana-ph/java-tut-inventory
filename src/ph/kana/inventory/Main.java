@@ -1,19 +1,30 @@
 package ph.kana.inventory;
 
+import ph.kana.inventory.service.ItemService;
+
 public class Main {
+
+	private static final ItemService itemService = new ItemService();
 
 	public static void main(String[] args) {
 		if (args.length < 1) {
 			displayHelp();
 		} else {
-			executeCommand(args[0]);
+			executeCommand(args);
 		}
 	}
 
-	private static void executeCommand(String command) {
-		switch (command.toLowerCase()) {
+	private static void executeCommand(String[] args) {
+		String command = args[0].toLowerCase();
+		switch (command) {
 			case "add":
-				// TODO add item logic
+				String name = args[1];
+				int quantity = Integer.parseInt(args[2]);
+
+				Item item = itemService.create(name, quantity);
+				String message = String.format("Item [%s] has been saved successfully!", item.getName());
+				System.out.println(message);
+
 				break;
 
 			case "edit":
