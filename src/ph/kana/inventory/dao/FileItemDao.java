@@ -107,8 +107,15 @@ public class FileItemDao implements ItemDao {
 		return item;
 	}
 
-	private Long determineItemId() {
-		long listSize = (long) itemList.size();
-		return listSize + 1;
+	private long determineItemId() {
+		long highestId = 0;
+		for (Item item : itemList) {
+			long itemId = item.getId();
+			if (itemId > highestId) {
+				highestId = itemId;
+			}
+		}
+
+		return highestId + 1;
 	}
 }
