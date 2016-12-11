@@ -41,7 +41,7 @@ public class Main {
 				break;
 
 			case "delete":
-				// TODO delete item logic
+				delete(args);
 				break;
 
 			default:
@@ -76,6 +76,14 @@ public class Main {
 		for (Item item : items) {
 			System.out.printf("%3d %4d %s\n", item.getId(), item.getQuantity(), item.getName());
 		}
+	}
+
+	private static void delete(String[] args) throws ServiceException {
+		Long id = Long.parseLong(args[1]);
+
+		itemService.delete(id);
+		String message = String.format("Item #%d is deleted", id);
+		System.out.println(message);
 	}
 
 	private static void displayHelp() {

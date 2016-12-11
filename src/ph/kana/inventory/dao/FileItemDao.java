@@ -14,9 +14,7 @@ public class FileItemDao implements ItemDao {
 	public FileItemDao() {
 		try {
 			loadItemListFromFile();
-		} catch (DataAccessException e) {
-			//TODO handle exception
-		}
+		} catch (DataAccessException e) { }
 	}
 
 	@Override
@@ -46,6 +44,20 @@ public class FileItemDao implements ItemDao {
 	@Override
 	public List<Item> fetchAll() throws DataAccessException {
 		return new ArrayList<>(itemList);
+	}
+
+	@Override
+	public void delete(Item itemToDelete) throws DataAccessException {
+		long deleteId = itemToDelete.getId();
+		for (Item item : itemList) {
+			long itemId = item.getId();
+
+			if (itemId == deleteId) {
+				itemList.remove(item);
+				break;
+			}
+		}
+		saveItemListToFile();
 	}
 
 	private void saveItemListToFile() throws DataAccessException {

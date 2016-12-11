@@ -14,4 +14,6 @@ public interface ItemDao {
 	void update(Item item) throws DataAccessException;
 
 	List<Item> fetchAll() throws DataAccessException;
+
+	void delete(Item item) throws DataAccessException;
 }

@@ -50,4 +50,18 @@ public class ItemService {
 			throw new ServiceException("Error fetching item data", e);
 		}
 	}
+
+	public void delete(Long id) throws ServiceException {
+		try {
+			Item item = itemDao.findById(id);
+
+			if (item != null) {
+				itemDao.delete(item);
+			} else {
+				throw new ServiceException("Item not found for given id!");
+			}
+		} catch (DataAccessException e) {
+			throw new ServiceException("Error deleting item data", e);
+		}
+	}
 }
