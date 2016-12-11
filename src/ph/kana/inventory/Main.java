@@ -1,6 +1,7 @@
 package ph.kana.inventory;
 
 import ph.kana.inventory.exception.ServiceException;
+import ph.kana.inventory.model.Item;
 import ph.kana.inventory.service.ItemService;
 
 import java.util.List;

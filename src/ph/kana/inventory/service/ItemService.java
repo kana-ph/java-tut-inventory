@@ -1,11 +1,10 @@
 package ph.kana.inventory.service;
 
-
-import ph.kana.inventory.Item;
 import ph.kana.inventory.dao.FileItemDao;
 import ph.kana.inventory.dao.ItemDao;
 import ph.kana.inventory.exception.DataAccessException;
 import ph.kana.inventory.exception.ServiceException;
+import ph.kana.inventory.model.Item;
 
 import java.util.List;
 

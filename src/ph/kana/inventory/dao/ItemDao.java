@@ -1,8 +1,7 @@
 package ph.kana.inventory.dao;
 
-
-import ph.kana.inventory.Item;
 import ph.kana.inventory.exception.DataAccessException;
+import ph.kana.inventory.model.Item;
 
 import java.util.List;
 

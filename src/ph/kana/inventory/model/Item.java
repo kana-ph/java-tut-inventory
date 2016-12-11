@@ -1,4 +1,4 @@
-package ph.kana.inventory;
+package ph.kana.inventory.model;
 
 public class Item {
 	private Long id;
