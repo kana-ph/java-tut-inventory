@@ -11,6 +11,8 @@ public class FileItemDao implements ItemDao {
 
 	private final List<Item> itemList = new ArrayList<>();
 
+	private final String ITEM_FILE = "items.txt";
+
 	public FileItemDao() {
 		try {
 			loadItemListFromFile();
@@ -61,7 +63,7 @@ public class FileItemDao implements ItemDao {
 	}
 
 	private void saveItemListToFile() throws DataAccessException {
-		File file = new File("items.txt");
+		File file = new File(ITEM_FILE);
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
 			for (Item item : itemList) {
 				String itemCsv = formatItemAsCsv(item);
@@ -75,7 +77,7 @@ public class FileItemDao implements ItemDao {
 	}
 
 	private void loadItemListFromFile() throws DataAccessException {
-		File file = new File("items.txt");
+		File file = new File(ITEM_FILE);
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 			String read = reader.readLine();
 			while (read != null) {
