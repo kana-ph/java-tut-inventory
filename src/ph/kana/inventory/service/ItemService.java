@@ -2,6 +2,7 @@ package ph.kana.inventory.service;
 
 import ph.kana.inventory.dao.FileItemDao;
 import ph.kana.inventory.dao.ItemDao;
+import ph.kana.inventory.dao.PostgresItemDao;
 import ph.kana.inventory.exception.DataAccessException;
 import ph.kana.inventory.exception.ServiceException;
 import ph.kana.inventory.model.Item;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class ItemService {
 
-	private final ItemDao itemDao = new FileItemDao();
+	private final ItemDao itemDao = new PostgresItemDao();
 
 	public Item create(String name, int quantity) throws ServiceException {
 		Item item = new Item();
